@@ -3,12 +3,19 @@ using UnityEngine;
 public class TriggerPorta : MonoBehaviour
 {
     [Header("Interfaccia Utente")]
-    [Tooltip("Il pannello UI con il testo 'Premi E per entrare'")]
+    [Tooltip("Il pannello UI con il testo 'Premi E per entrare/uscire'")]
     public GameObject pannelloMessaggio;
 
     [Header("Destinazione Teletrasporto")]
     [Tooltip("L'Empty dove verrà spostata la telecamera premendo E")]
     public Transform puntoDestinazione;
+
+    [Header("Gestione Audio")]
+    [Tooltip("Sorgenti audio da fermare quando premi E")]
+    public AudioSource[] audioDaDisattivare;
+
+    [Tooltip("Sorgenti audio da far partire quando premi E")]
+    public AudioSource[] audioDaAttivare;
 
     private bool giocatoreInZona = false;
     private Transform visitatoreTransform;
@@ -31,7 +38,6 @@ public class TriggerPorta : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Riconosce il giocatore cercando il CharacterController (indipendentemente dal nome dell'oggetto)
         CharacterController controller = other.GetComponent<CharacterController>();
 
         if (controller != null)
@@ -42,10 +48,6 @@ public class TriggerPorta : MonoBehaviour
             if (pannelloMessaggio != null)
             {
                 pannelloMessaggio.SetActive(true);
-            }
-            else
-            {
-                Debug.LogWarning("⚠️ Attenzione: Il Pannello Messaggio non è stato assegnato nell'Inspector!");
             }
         }
     }
@@ -81,13 +83,31 @@ public class TriggerPorta : MonoBehaviour
                 controller.enabled = false;
             }
 
-            // Spostiamo la posizione e la rotazione
+            // Spostamento posizione e rotazione
             visitatoreTransform.position = puntoDestinazione.position;
             visitatoreTransform.rotation = puntoDestinazione.rotation;
 
             if (controller != null)
             {
                 controller.enabled = true;
+            }
+
+            // 1. Spegni le tracce specificate
+            if (audioDaDisattivare != null)
+            {
+                foreach (AudioSource sorgente in audioDaDisattivare)
+                {
+                    if (sorgente != null) sorgente.Stop();
+                }
+            }
+
+            // 2. Accendi le nuove tracce specificate
+            if (audioDaAttivare != null)
+            {
+                foreach (AudioSource sorgente in audioDaAttivare)
+                {
+                    if (sorgente != null) sorgente.Play();
+                }
             }
 
             giocatoreInZona = false;

@@ -1,11 +1,12 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(AudioSource))]
 public class ControlloCamera : MonoBehaviour
 {
     [Header("Parametri Movimento")]
     [Tooltip("Velocità di spostamento del visitatore")]
-    public float velocitaMovimento = 5.0f;
+    public float velocitaMovimento = 10.0f;
 
     [Header("Parametri Visuale Mouse")]
     [Tooltip("Sensibilità del mouse per ruotare la vista")]
@@ -14,9 +15,18 @@ public class ControlloCamera : MonoBehaviour
     [Tooltip("Limite di inclinazione dello sguardo in alto e in basso (gradi)")]
     public float limiteSguardoVerticale = 80.0f;
 
+    [Header("Audio Passi")]
+    [Tooltip("Intervallo tra i passi (0.3 - 0.35s consigliato per velocità 10)")]
+    [SerializeField] private float intervalloPassi = 0.32f;
+
+    [Tooltip("Clip audio dei passi (puoi inserirne più di una per variare)")]
+    [SerializeField] private AudioClip[] suoniPassi;
+
     private float rotazioneX = 0.0f;
     private float rotazioneY = 0.0f;
     private CharacterController characterController;
+    private AudioSource audioSource;
+    private float timerPasso = 0.0f;
 
     void Start()
     {
@@ -24,8 +34,17 @@ public class ControlloCamera : MonoBehaviour
         Cursor.visible = true;
 
         characterController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
 
-        // Sincronizziamo la rotazione iniziale
+        // Configura l'AudioSource in modalità corretta
+        if (audioSource != null)
+        {
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
+            audioSource.spatialBlend = 0.0f; // Audio 2D (sentito in prima persona)
+            audioSource.volume = 0.35f;
+        }
+
         SincronizzaAngoli();
     }
 
@@ -33,17 +52,12 @@ public class ControlloCamera : MonoBehaviour
     {
         Cursor.visible = true;
 
-        // ==========================================
         // 1. ROTAZIONE VISUALE (SOLO CON TASTO SINISTRO)
-        // ==========================================
-        
-        // APPENA SI CLICCA: Rialliniamo le variabili con la rotazione reale della telecamera
         if (Input.GetMouseButtonDown(0))
         {
             SincronizzaAngoli();
         }
 
-        // MENTRE SI TIENE PREMUTO: Applichiamo la rotazione fluida
         if (Input.GetMouseButton(0))
         {
             float mouseX = Input.GetAxis("Mouse X") * sensibilitaMouse;
@@ -56,9 +70,7 @@ public class ControlloCamera : MonoBehaviour
             transform.localRotation = Quaternion.Euler(rotazioneX, rotazioneY, 0.0f);
         }
 
-        // ==========================================
         // 2. SPOSTAMENTO CON COLLISIONI (FRECCE / WASD)
-        // ==========================================
         float orizzontale = Input.GetAxis("Horizontal");
         float verticale = Input.GetAxis("Vertical");
 
@@ -71,19 +83,45 @@ public class ControlloCamera : MonoBehaviour
         direzioneAvanti.Normalize();
         direzioneDestra.Normalize();
 
-        Vector3 spostamento = (direzioneAvanti * verticale + direzioneDestra * orizzontale) * velocitaMovimento;
+        Vector3 direzioneMovimento = direzioneAvanti * verticale + direzioneDestra * orizzontale;
+        Vector3 spostamento = direzioneMovimento * velocitaMovimento;
 
         characterController.Move(spostamento * Time.deltaTime);
+
+        // 3. GESTIONE RUMORE DEI PASSI
+        bool siStaMuovendo = direzioneMovimento.sqrMagnitude > 0.01f;
+
+        if (siStaMuovendo)
+        {
+            timerPasso += Time.deltaTime;
+
+            if (timerPasso >= intervalloPassi)
+            {
+                RiproduciPasso();
+                timerPasso = 0.0f;
+            }
+        }
+        else
+        {
+            // Ripristina il timer per riprodurre subito il passo alla ripartenza
+            timerPasso = intervalloPassi;
+        }
     }
 
-    /// <summary>
-    /// Legge la rotazione attuale della telecamera e aggiorna le variabili per evitare scatti
-    /// </summary>
+    private void RiproduciPasso()
+    {
+        if (suoniPassi != null && suoniPassi.Length > 0 && audioSource != null)
+        {
+            AudioClip clipCasuale = suoniPassi[Random.Range(0, suoniPassi.Length)];
+            audioSource.pitch = Random.Range(0.92f, 1.08f); // Leggera variazione di tono realistica
+            audioSource.PlayOneShot(clipCasuale);
+        }
+    }
+
     private void SincronizzaAngoli()
     {
         Vector3 angoli = transform.localRotation.eulerAngles;
 
-        // Gestiamo il passaggio da 0-360 gradi al range con segno (-180 a +180) per la pendenza (pitch)
         rotazioneX = angoli.x;
         if (rotazioneX > 180.0f)
         {
