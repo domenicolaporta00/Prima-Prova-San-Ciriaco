@@ -21664,6 +21664,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8170650169141175887, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8170650169141175887, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8170650169141175887, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
       propertyPath: m_Name
       value: claude_campanile
@@ -21671,7 +21683,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -4588617762592796781, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1824111947}
+    - targetCorrespondingSourceObject: {fileID: 5890560066430088894, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1821711323}
   m_SourcePrefab: {fileID: 100100000, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
 --- !u!4 &699023575 stripped
 Transform:
@@ -57747,6 +57765,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e334e6614ad50f749b0a37528784c614, type: 3}
+--- !u!1 &1821711319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5890560066430088894, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+  m_PrefabInstance: {fileID: 692049766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1821711323
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821711319}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d59d6aea558789c4c9612d50623fd90b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1823266484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57816,6 +57861,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e334e6614ad50f749b0a37528784c614, type: 3}
+--- !u!1 &1824111943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4588617762592796781, guid: 9cf499e66188c634898afd249f8098e1, type: 3}
+  m_PrefabInstance: {fileID: 692049766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1824111947
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824111943}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e285935490be1ba4f855b7dd52116689, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &1824491765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2121115777601841395, guid: e334e6614ad50f749b0a37528784c614, type: 3}
@@ -60935,6 +61007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SuonoCampanile
   intervalloSecondi: 60
+  animatorDestra: {fileID: 1824111947}
+  animatorSinistra: {fileID: 1821711323}
 --- !u!82 &1922637267
 AudioSource:
   m_ObjectHideFlags: 0
