@@ -6,10 +6,20 @@ public class VistaBinocolo : MonoBehaviour
     [Header("Riferimenti UI")]
     public GameObject pannelloBinocolo;
     public ScrollRect scrollRect;
+    public RectTransform fotoPanorama;
     public Button bottoneChiudi;
 
-    [Header("Velocita Scorrimento Tastiera")]
+    [Header("Velocita e Movimento")]
     public float velocitaTastiera = 0.5f;
+
+    [Header("Parametri Zoom")]
+    public float sensibilitaRotellina = 3f;  // Quanto sposta la rotellina
+    public float fluiditaZoom = 7f;           // Piu e alto, piu e reattivo; piu e basso, piu e morbido
+    public float minZoom = 1.0f;
+    public float maxZoom = 2.5f;
+
+    private float targetZoom = 1.0f;
+    private float zoomAttuale = 1.0f;
 
     [Header("Controllo Giocatore")]
     public ControlloCamera scriptControlloCamera; 
@@ -29,7 +39,23 @@ public class VistaBinocolo : MonoBehaviour
     {
         if (!isOpen) return;
 
-        // Scorrimento orizzontale (A/D o Frecce SX/DX)
+        // 1. GESTIONE ZOOM MORBIDO
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (Mathf.Abs(scroll) > 0.001f)
+        {
+            targetZoom += scroll * sensibilitaRotellina;
+            targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+        }
+
+        // Si avvicina al target in modo fluido frame per frame
+        zoomAttuale = Mathf.Lerp(zoomAttuale, targetZoom, Time.deltaTime * fluiditaZoom);
+
+        if (fotoPanorama != null)
+        {
+            fotoPanorama.localScale = new Vector3(zoomAttuale, zoomAttuale, 1f);
+        }
+
+        // 2. SCORRIMENTO ORIZZONTALE (A/D o Frecce SX/DX)
         float inputOrizzontale = Input.GetAxis("Horizontal");
         if (Mathf.Abs(inputOrizzontale) > 0.01f)
         {
@@ -37,7 +63,7 @@ public class VistaBinocolo : MonoBehaviour
             scrollRect.horizontalNormalizedPosition = Mathf.Clamp01(scrollRect.horizontalNormalizedPosition);
         }
 
-        // Scorrimento verticale (W/S o Frecce SU/GIU)
+        // 3. SCORRIMENTO VERTICALE (W/S o Frecce SU/GIU)
         float inputVerticale = Input.GetAxis("Vertical");
         if (Mathf.Abs(inputVerticale) > 0.01f)
         {
@@ -45,7 +71,7 @@ public class VistaBinocolo : MonoBehaviour
             scrollRect.verticalNormalizedPosition = Mathf.Clamp01(scrollRect.verticalNormalizedPosition);
         }
 
-        // Chiusura rapida con ESC
+        // 4. CHIUSURA CON ESC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ChiudiBinocolo();
@@ -57,7 +83,13 @@ public class VistaBinocolo : MonoBehaviour
         isOpen = true;
         pannelloBinocolo.SetActive(true);
 
-        // Centra la vista sia in orizzontale che in verticale all'apertura
+        // Reset immediato allo stato iniziale
+        targetZoom = 1.0f;
+        zoomAttuale = 1.0f;
+
+        if (fotoPanorama != null)
+            fotoPanorama.localScale = Vector3.one;
+
         scrollRect.horizontalNormalizedPosition = 0.5f;
         scrollRect.verticalNormalizedPosition = 0.5f;
 
