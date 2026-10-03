@@ -70,7 +70,7 @@ public class ControlloCamera : MonoBehaviour
             transform.localRotation = Quaternion.Euler(rotazioneX, rotazioneY, 0.0f);
         }
 
-        // 2. SPOSTAMENTO CON COLLISIONI (FRECCE / WASD)
+        // 2. SPOSTAMENTO CON COLLISIONI (FRECCE / WASD) E GRAVITÀ
         float orizzontale = Input.GetAxis("Horizontal");
         float verticale = Input.GetAxis("Vertical");
 
@@ -85,6 +85,9 @@ public class ControlloCamera : MonoBehaviour
 
         Vector3 direzioneMovimento = direzioneAvanti * verticale + direzioneDestra * orizzontale;
         Vector3 spostamento = direzioneMovimento * velocitaMovimento;
+
+        // Spinta costante verso il basso per agganciare scalini e salite
+        spostamento.y = -9.81f;
 
         characterController.Move(spostamento * Time.deltaTime);
 

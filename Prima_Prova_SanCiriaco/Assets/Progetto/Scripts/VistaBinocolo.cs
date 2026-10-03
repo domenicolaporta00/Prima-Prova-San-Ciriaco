@@ -13,16 +13,20 @@ public class VistaBinocolo : MonoBehaviour
     public float velocitaTastiera = 0.5f;
 
     [Header("Parametri Zoom")]
-    public float sensibilitaRotellina = 3f;  // Quanto sposta la rotellina
-    public float fluiditaZoom = 7f;           // Piu e alto, piu e reattivo; piu e basso, piu e morbido
+    public float sensibilitaRotellina = 3f;
+    public float fluiditaZoom = 7f;
     public float minZoom = 1.0f;
     public float maxZoom = 2.5f;
 
     private float targetZoom = 1.0f;
     private float zoomAttuale = 1.0f;
 
-    [Header("Controllo Giocatore")]
+    [Header("Controllo Giocatore e Camera")]
+    [Tooltip("Trascina qui l'oggetto Player")]
     public ControlloCamera scriptControlloCamera; 
+
+    [Tooltip("Trascina qui l'oggetto CM_PlayerCamera")]
+    public GameObject virtualCamera;
 
     private bool isOpen = false;
 
@@ -47,7 +51,6 @@ public class VistaBinocolo : MonoBehaviour
             targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
         }
 
-        // Si avvicina al target in modo fluido frame per frame
         zoomAttuale = Mathf.Lerp(zoomAttuale, targetZoom, Time.deltaTime * fluiditaZoom);
 
         if (fotoPanorama != null)
@@ -83,7 +86,7 @@ public class VistaBinocolo : MonoBehaviour
         isOpen = true;
         pannelloBinocolo.SetActive(true);
 
-        // Reset immediato allo stato iniziale
+        // Reset zoom e centratura
         targetZoom = 1.0f;
         zoomAttuale = 1.0f;
 
@@ -96,8 +99,13 @@ public class VistaBinocolo : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        // Congela il movimento del Player e la visuale del mouse
         if (scriptControlloCamera != null)
             scriptControlloCamera.enabled = false;
+
+        // Disattiva Cinemachine per congelare completamente qualsiasi oscillazione 3D
+        if (virtualCamera != null)
+            virtualCamera.SetActive(false);
     }
 
     public void ChiudiBinocolo()
@@ -105,7 +113,12 @@ public class VistaBinocolo : MonoBehaviour
         isOpen = false;
         pannelloBinocolo.SetActive(false);
 
+        // Riattiva il Player
         if (scriptControlloCamera != null)
             scriptControlloCamera.enabled = true;
+
+        // Riattiva Cinemachine
+        if (virtualCamera != null)
+            virtualCamera.SetActive(true);
     }
 }
