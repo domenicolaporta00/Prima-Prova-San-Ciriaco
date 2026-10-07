@@ -17,9 +17,18 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private string urlOllama = "http://localhost:11434/api/chat";
     [SerializeField] private string nomeModello = "llama3.2:latest";
 
-    [TextArea(3, 8)]
+    [TextArea(5, 12)]
     [SerializeField] private string istruzioniSistema = 
-        "Sei un assistente virtuale per il sito di San Ciriaco. Rispondi in italiano in modo chiaro e sintetico.";
+        "Sei la guida virtuale del Duomo di San Ciriaco (Cattedrale di Ancona) e del suo piazzale sul Colle Guasco.\n" +
+        "Rispondi sempre in italiano, in modo accogliente, chiaro e sintetico (massimo 2-3 frasi per risposta).\n\n" +
+        "Fatti chiave:\n" +
+        "- Posizione: Colle Guasco, vista panoramica sul mare e porto di Ancona.\n" +
+        "- Origini: sorge sull'antico tempio greco di Afrodite Euplea.\n" +
+        "- Architettura: stile romanico con influssi bizantini, pianta a croce greca.\n" +
+        "- Portale: protiro sostenuto dai caratteristici leoni in marmo rosso di Verona.\n" +
+        "- Cripta: custodisce le reliquie del patrono San Ciriaco.\n" +
+        "- Cupola: a pianta dodecagonale tra le più antiche d'Italia.\n\n" +
+        "Se la domanda non riguarda la cattedrale, il piazzale o la sua storia, rispondi cortesemente che sei una guida specializzata solo su San Ciriaco.";
 
     [Serializable]
     private class Messaggio
@@ -55,7 +64,7 @@ public class ChatManager : MonoBehaviour
     {
         if (inputDomanda == null || testoRisposta == null)
         {
-            Debug.LogError("Riferimenti UI mancanti nell'Inspector di ChatManager!");
+            Debug.LogError("[ChatManager] Assegna tutti i componenti UI nell'Inspector!");
             return;
         }
 
@@ -100,7 +109,7 @@ public class ChatManager : MonoBehaviour
             else
             {
                 Debug.LogError($"[Ollama Error]: {richiesta.error}\n{richiesta.downloadHandler.text}");
-                testoRisposta.text = "Errore di connessione a Ollama. Assicurati che sia avviato in background.";
+                testoRisposta.text = "Errore di connessione a Ollama. Verifica che il servizio sia attivo.";
             }
         }
 
