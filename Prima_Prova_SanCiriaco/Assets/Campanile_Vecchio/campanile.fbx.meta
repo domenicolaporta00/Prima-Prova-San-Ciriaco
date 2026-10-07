@@ -1,9 +1,59 @@
 fileFormatVersion: 2
-guid: e0d9dd0f0ad93dd419b70c385bb83d11
+guid: df330a9330db3e7468bdb21cfdda4784
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Aperture_Dark.002
+    second: {fileID: 2100000, guid: d90322f758f94bc4a9bbca65acf8c194, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bronzo_Patinato.003
+    second: {fileID: 2100000, guid: 17241d8098bef764f88e5dcc9f79f537, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cotto_Cupola_Fix
+    second: {fileID: 2100000, guid: a024a7e3a8ee1d1428c04624feb9c394, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Intonaco_Chiaro.002
+    second: {fileID: 2100000, guid: 4914eb12f4882d44b9920d2d997198c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Materiale_2.001
+    second: {fileID: 2100000, guid: 78dbf159c1258024e96e1d49a13ce92a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Materiale_2.009
+    second: {fileID: 2100000, guid: f6e8411dffa9ccf43994e15ef8158948, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mattoni_Ghiera.002
+    second: {fileID: 2100000, guid: b30df684527b72c42af707c470a6151e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metallo_Scuro.003
+    second: {fileID: 2100000, guid: 00aa797550fe3d54991ca57090017aff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pietra_Conero.001
+    second: {fileID: 2100000, guid: 6d4ae186dd25d7e479520d3a625141e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pietra_Conero.006
+    second: {fileID: 2100000, guid: f0a846ad25986374c9b41935d43434ae, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
