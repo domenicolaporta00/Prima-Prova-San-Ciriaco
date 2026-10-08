@@ -77,6 +77,27 @@ public class ChatManager : MonoBehaviour
         StartCoroutine(ChiamaOllamaCoroutine(prompt));
     }
 
+    // Metodo aggiunto per supportare l'input vocale da VoiceRecorder
+    public void InviaDomandaVocale(string domandaTrascritto)
+    {
+        if (inputDomanda != null)
+        {
+            inputDomanda.text = domandaTrascritto;
+        }
+        
+        if (bottoneInvia != null)
+        {
+            bottoneInvia.interactable = false;
+        }
+
+        if (testoRisposta != null)
+        {
+            testoRisposta.text = "Sto pensando...";
+        }
+
+        StartCoroutine(ChiamaOllamaCoroutine(domandaTrascritto));
+    }
+
     private IEnumerator ChiamaOllamaCoroutine(string promptUtente)
     {
         RichiestaChat payload = new RichiestaChat
