@@ -17,7 +17,7 @@ public class ServerLauncher : MonoBehaviour
     [SerializeField] private bool mostraCaricamento = true;
     [SerializeField] private Sprite immagineCaricamento;
     [SerializeField] private Vector2 dimensioneImmagine = new Vector2(1000, 450);
-    [SerializeField] private string testoMessaggio = "Preparazione scena";
+    [SerializeField] private string testoMessaggio = "In preparazione ";
     [SerializeField] private int dimensioneTesto = 44;
     [SerializeField, Range(0f, 1f)] private float opacitaSfondo = 0.92f;
 

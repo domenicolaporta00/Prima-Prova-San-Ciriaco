@@ -16,10 +16,17 @@ import os
 app = FastAPI()
 
 # ----------------------------------------------------------------------
+# RILEVAMENTO HARDWARE (CUDA / CPU FALLBACK)
+# ----------------------------------------------------------------------
+device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"[Device] Hardware rilevato per inferenza: {device.upper()}", flush=True)
+
+# ----------------------------------------------------------------------
 # 1. SETUP SPEECH-TO-TEXT (faster-whisper)
 # ----------------------------------------------------------------------
-# Upgrade futuro: WhisperModel("large-v3-turbo", device="cuda", compute_type="int8_float16")
-stt_model = WhisperModel("small", device="cpu", compute_type="int8")
+# Su GPU usa int8_float16 per performance/VRAM ottimali, su CPU usa int8 standard
+whisper_compute = "int8_float16" if device == "cuda" else "int8"
+stt_model = WhisperModel("small", device=device, compute_type=whisper_compute)
 
 # ----------------------------------------------------------------------
 # 2. SETUP TEXT-TO-SPEECH (Kokoro - Voce Italiana)
@@ -28,8 +35,8 @@ KOKORO_VOICE = "if_sara"        # femminile. Alternativa maschile: "im_nicola"
 KOKORO_SPEED = 0.95             # <1 = più posata, adatta a una guida
 KOKORO_SAMPLE_RATE = 24000
 
-# Su GPU (circa 0,5 GB di VRAM). Se dà problemi, metti device="cpu"
-kokoro = KPipeline(lang_code="i", repo_id="hexgrad/Kokoro-82M", device="cuda")
+# Fallback automatico: se cuda non è disponibile, inizializza su cpu
+kokoro = KPipeline(lang_code="i", repo_id="hexgrad/Kokoro-82M", device=device)
 
 # Riscaldamento: la prima sintesi è lenta, la facciamo all'avvio
 print("[TTS] Riscaldamento Kokoro...", flush=True)
