@@ -25,7 +25,7 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private AudioSource audioSourceVoce;
 
     [Header("Endpoint Locali")]
-    [SerializeField] private string urlOllama = "http://localhost:11434/api/chat";
+    [SerializeField] private string urlOllama = "http://localhost:11435/api/chat";
     [SerializeField] private string urlTTS = "http://127.0.0.1:5000/tts";
     [SerializeField] private string nomeModello = "gemma3:4b";
 

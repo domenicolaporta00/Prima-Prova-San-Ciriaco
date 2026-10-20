@@ -14,3 +14,10 @@
 *.csproj
 *.sln
 *.unityproj
+Prima_Prova_SanCiriaco/Server/ollama_models/
+Prima_Prova_SanCiriaco/Server/hf_cache/
+Prima_Prova_SanCiriaco/Assets/_Recovery/
+
+Prima_Prova_SanCiriaco/Server/ollama/
+Prima_Prova_SanCiriaco/Server/python/
+Prima_Prova_SanCiriaco/Server/server.log
