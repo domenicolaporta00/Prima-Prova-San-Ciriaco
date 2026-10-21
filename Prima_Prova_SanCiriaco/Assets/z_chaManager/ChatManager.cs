@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
@@ -25,18 +24,19 @@ public class ChatManager : MonoBehaviour
     [SerializeField] private AudioSource audioSourceVoce;
 
     [Header("Endpoint Locali")]
-    [SerializeField] private string urlOllama = "http://localhost:11435/api/chat";
+    [SerializeField] private string urlOllama = "http://127.0.0.1:11435/api/chat";
     [SerializeField] private string urlTTS = "http://127.0.0.1:5000/tts";
     [SerializeField] private string nomeModello = "gemma3:4b";
 
     [Header("Parametri LLM")]
     [SerializeField] private float temperatura = 0.3f;
+    [Tooltip("Contesto totale (prompt di sistema + domanda + risposta). Alzalo se le risposte sono molto lunghe.")]
     [SerializeField] private int dimensioneContesto = 4096;
     [SerializeField] private string keepAlive = "30m";
 
-    [Header("Vincolo lunghezza risposta")]
-    [SerializeField] private int maxTokenRisposta = 150;
-    [SerializeField] private int maxFrasi = 3;
+    [Header("Lunghezza risposta")]
+    [Tooltip("-1 = nessun limite (Ollama si ferma quando il modello ha finito)")]
+    [SerializeField] private int maxTokenRisposta = -1;
 
     [TextArea(5, 16)]
     [SerializeField] private string istruzioniSistema =
@@ -53,7 +53,7 @@ public class ChatManager : MonoBehaviour
         "- Cripta: custodisce le reliquie del patrono San Ciriaco.\n" +
         "- Cupola: a pianta dodecagonale tra le più antiche d'Italia.\n\n" +
         "Se la domanda non riguarda la cattedrale, il piazzale o la sua storia, rispondi cortesemente che sei una guida specializzata solo su San Ciriaco.\n\n" +
-        "REGOLA FONDAMENTALE: rispondi SEMPRE con al massimo 2 frasi brevi, senza eccezioni, anche se la domanda è ampia.";
+        "Rispondi in modo completo ma scorrevole, adatto alla lettura ad alta voce, senza ripetizioni inutili.";
 
     [Serializable]
     private class Messaggio
@@ -167,35 +167,16 @@ public class ChatManager : MonoBehaviour
     }
 
     // ------------------------------------------------------------------
-    private string LimitaRisposta(string testo)
+    // Pulizia del testo (nessun limite di lunghezza):
+    // toglie solo markdown e simboli che il TTS leggerebbe male.
+    // ------------------------------------------------------------------
+    private string PulisciRisposta(string testo)
     {
         if (string.IsNullOrWhiteSpace(testo)) return testo;
 
         testo = Regex.Replace(testo, @"[*#_`~>]", "");
         testo = Regex.Replace(testo, @"\s+", " ").Trim();
-
-        string[] parti = Regex.Split(testo, @"(?<=[.!?])\s+");
-        List<string> frasi = new List<string>();
-        foreach (string p in parti)
-        {
-            if (!string.IsNullOrWhiteSpace(p)) frasi.Add(p.Trim());
-        }
-
-        if (frasi.Count == 0) return testo;
-
-        string ultima = frasi[frasi.Count - 1];
-        bool ultimaCompleta = Regex.IsMatch(ultima, @"[.!?…]['""”»)]*$");
-        if (!ultimaCompleta && frasi.Count > 1)
-        {
-            frasi.RemoveAt(frasi.Count - 1);
-        }
-
-        if (maxFrasi > 0 && frasi.Count > maxFrasi)
-        {
-            frasi = frasi.GetRange(0, maxFrasi);
-        }
-
-        return string.Join(" ", frasi);
+        return testo;
     }
 
     private IEnumerator ChiamaOllamaCoroutine(string promptUtente)
@@ -211,7 +192,7 @@ public class ChatManager : MonoBehaviour
             {
                 temperature = temperatura,
                 num_ctx = dimensioneContesto,
-                num_predict = maxTokenRisposta
+                num_predict = maxTokenRisposta   // -1 = illimitato
             },
             messages = new Messaggio[]
             {
@@ -238,9 +219,9 @@ public class ChatManager : MonoBehaviour
             {
                 RispostaOllama risposta = JsonUtility.FromJson<RispostaOllama>(richiesta.downloadHandler.text);
                 string grezzo = risposta?.message?.content ?? "Nessuna risposta ricevuta.";
-                string testoGenerato = LimitaRisposta(grezzo);
+                string testoGenerato = PulisciRisposta(grezzo);
 
-                Debug.Log($"[Ollama] Risposta ({grezzo.Length} -> {testoGenerato.Length} caratteri): {testoGenerato}");
+                Debug.Log($"[Ollama] Risposta ({grezzo.Length} -> {testoGenerato.Length} caratteri, motivo fine: {risposta?.done_reason}): {testoGenerato}");
 
                 testoRisposta.text = testoGenerato;
                 StartCoroutine(ChiamaTTSCoroutine(testoGenerato, mia));
