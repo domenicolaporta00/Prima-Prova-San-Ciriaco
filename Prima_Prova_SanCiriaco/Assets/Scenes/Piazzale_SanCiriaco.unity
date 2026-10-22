@@ -4324,7 +4324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870167790249810, guid: 0ae65270c30153049ab49eb3ebf070d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.95
+      value: 14.67
       objectReference: {fileID: 0}
     - target: {fileID: 4870167790249810, guid: 0ae65270c30153049ab49eb3ebf070d6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4332,7 +4332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4870167790249810, guid: 0ae65270c30153049ab49eb3ebf070d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -17.29
+      value: -17.17
       objectReference: {fileID: 0}
     - target: {fileID: 4870167790249810, guid: 0ae65270c30153049ab49eb3ebf070d6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13776,79 +13776,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226081844}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &226663179
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 164.45535
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 155.57782
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 165
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -16.8
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -28.2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_Name
-      value: Duomo_vero (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6e6d8cf41cddc1346add2f43eceaf44e, type: 3}
 --- !u!1001 &227006605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29636,6 +29563,111 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550557964}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &553121709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553121713}
+  - component: {fileID: 553121712}
+  - component: {fileID: 553121711}
+  - component: {fileID: 553121710}
+  m_Layer: 0
+  m_Name: Trigger_Leone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &553121710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553121709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eb0bcc1bb2a6e45a372454484f3fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DatiHotspot
+  titolo: I Leoni del Protiro
+  descrizione: "Posti a guardia del protiro ghibellino della Cattedrale di San Ciriaco,
+    i due leoni stilofori in marmo rosso di Verona costituiscono uno degli elementi
+    pi\xF9 iconici e suggestivi di Colle Guasco. Scolpite nel XIII secolo a protezione
+    della soglia sacra, le sculture ritraggono i fieri felini intenti a trattenere
+    tra le zampe un ariete e un animale alato; a essi si lega la celebre \"prova
+    di coraggio\" della tradizione popolare, che spinge generazioni di bambini anconetani
+    a infilare la mano nelle loro fauci di pietra, specialmente durante la festa
+    patronale del 4 maggio."
+  fotoDettagliata: {fileID: 21300000, guid: 1be36882bcbe85946ac34d229efef404, type: 3}
+--- !u!114 &553121711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553121709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fab7120cdaa3784d802b9604dc892ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerInterazione
+  promptUI: {fileID: 988223526}
+  azioneInterazione:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 553121710}
+        m_TargetAssemblyTypeName: DatiHotspot, Assembly-CSharp
+        m_MethodName: ApriSchedaInformativa
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &553121712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553121709}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &553121713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553121709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.47, y: 4.95, z: -74.49}
+  m_LocalScale: {x: 1, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &555652699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2121115777601841395, guid: e334e6614ad50f749b0a37528784c614, type: 3}
@@ -29783,7 +29815,7 @@ Transform:
   m_GameObject: {fileID: 558757397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.82903767, z: -0, w: -0.55919284}
-  m_LocalPosition: {x: -9.58, y: 0.00001, z: 4.63}
+  m_LocalPosition: {x: -8.28, y: 0.00001, z: 4.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30099,7 +30131,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &561658753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30484,8 +30516,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.34
+      value: -25.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30493,7 +30537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -67.88
+      value: -85.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38795,7 +38839,7 @@ Transform:
   m_GameObject: {fileID: 705529755}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4, y: -8.78, z: -23.65}
+  m_LocalPosition: {x: -0.4, y: -8.78, z: -20.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47816,7 +47860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 65
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalScale.z
@@ -47824,15 +47868,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.006160736
+      value: 0.97
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.8268204
+      value: -3.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.68647
+      value: 12.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cebe4d1a274001d4084c3545a838d72a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54556,7 +54600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &988223527
 RectTransform:
   m_ObjectHideFlags: 0
@@ -55003,7 +55047,7 @@ Transform:
   m_GameObject: {fileID: 997714646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.19080894, z: -0, w: 0.9816273}
-  m_LocalPosition: {x: 20.478737, y: 0.01, z: -19.553213}
+  m_LocalPosition: {x: 20.09, y: 0.01, z: -19.4}
   m_LocalScale: {x: 0.049999997, y: 1, z: 0.79999995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57895,7 +57939,7 @@ Transform:
   m_GameObject: {fileID: 1058518017}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0.27, y: -7.21, z: -11.45}
+  m_LocalPosition: {x: 0.27, y: -7.21, z: -11.75}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -68811,8 +68855,8 @@ Transform:
   m_GameObject: {fileID: 1245196261}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.82903755, z: -0, w: 0.559193}
-  m_LocalPosition: {x: 18.362083, y: 0.01, z: -14.114252}
-  m_LocalScale: {x: 0.05, y: 1, z: 0.85}
+  m_LocalPosition: {x: 18.158783, y: 0.01, z: -14.035965}
+  m_LocalScale: {x: 0.05, y: 1, z: 0.81}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 558757398}
@@ -73871,6 +73915,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1346264452}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1346957580
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -28.9
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
+      propertyPath: m_Name
+      value: Duomo_vero
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 690802437e79a6f44a2f9e3d19d7d9cd, type: 3}
 --- !u!1001 &1349004543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74649,7 +74762,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c3cb54ea0d08dc347baccd51ea18c58f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2000
+      value: 2100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3cb54ea0d08dc347baccd51ea18c58f, type: 3}
       propertyPath: m_LocalScale.y
@@ -74669,7 +74782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3cb54ea0d08dc347baccd51ea18c58f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.5
+      value: -9.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3cb54ea0d08dc347baccd51ea18c58f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -75384,6 +75497,111 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2121115777601841395, guid: e334e6614ad50f749b0a37528784c614, type: 3}
   m_PrefabInstance: {fileID: 1384084512}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1384279555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1384279559}
+  - component: {fileID: 1384279558}
+  - component: {fileID: 1384279557}
+  - component: {fileID: 1384279556}
+  m_Layer: 0
+  m_Name: Trigger_Leone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1384279556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384279555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32eb0bcc1bb2a6e45a372454484f3fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DatiHotspot
+  titolo: I Leoni del Protiro
+  descrizione: "Posti a guardia del protiro ghibellino della Cattedrale di San Ciriaco,
+    i due leoni stilofori in marmo rosso di Verona costituiscono uno degli elementi
+    pi\xF9 iconici e suggestivi di Colle Guasco. Scolpite nel XIII secolo a protezione
+    della soglia sacra, le sculture ritraggono i fieri felini intenti a trattenere
+    tra le zampe un ariete e un animale alato; a essi si lega la celebre \"prova
+    di coraggio\" della tradizione popolare, che spinge generazioni di bambini anconetani
+    a infilare la mano nelle loro fauci di pietra, specialmente durante la festa
+    patronale del 4 maggio."
+  fotoDettagliata: {fileID: 21300000, guid: 1be36882bcbe85946ac34d229efef404, type: 3}
+--- !u!114 &1384279557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384279555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fab7120cdaa3784d802b9604dc892ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TriggerInterazione
+  promptUI: {fileID: 988223526}
+  azioneInterazione:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1384279556}
+        m_TargetAssemblyTypeName: DatiHotspot, Assembly-CSharp
+        m_MethodName: ApriSchedaInformativa
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &1384279558
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384279555}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 4}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1384279559
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384279555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.33, y: 4.95, z: -74.49}
+  m_LocalScale: {x: 1, y: 3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1384818705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76138,7 +76356,7 @@ Transform:
   m_GameObject: {fileID: 1398856459}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.27, y: -7.21, z: 6.48}
+  m_LocalPosition: {x: 3.1, y: -7.21, z: 6.18}
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80808,7 +81026,7 @@ GameObject:
   - component: {fileID: 1469867719}
   - component: {fileID: 1469867718}
   m_Layer: 0
-  m_Name: Trigger_Leone
+  m_Name: Trigger_Chat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80872,7 +81090,7 @@ Transform:
   m_GameObject: {fileID: 1469867716}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -30, y: 4.5, z: -71.8}
+  m_LocalPosition: {x: -25.7, y: 4.5, z: -89.1}
   m_LocalScale: {x: 3, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -85352,7 +85570,6 @@ MonoBehaviour:
   dimensioneContesto: 4096
   keepAlive: 30m
   maxTokenRisposta: 150
-  maxFrasi: 3
   istruzioniSistema: "Sei la guida virtuale del Duomo di San Ciriaco (Cattedrale
     di Ancona) e del suo piazzale sul Colle Guasco.\nRispondi sempre in italiano,
     in modo accogliente, chiaro e sintetico (massimo 2-3 frasi per risposta).\n\nFatti
@@ -101683,7 +101900,7 @@ Transform:
   m_GameObject: {fileID: 1855914746}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9816272, z: -0, w: 0.1908091}
-  m_LocalPosition: {x: 9.19, y: 0.00001, z: -0.62}
+  m_LocalPosition: {x: 10.11, y: 0.00001, z: -2.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -103864,15 +104081,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900801236}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.64273, y: 4.84327, z: -57.33925}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -42.3, y: 4.84327, z: -68.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 381070384}
   - {fileID: 953033125}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!1 &1902753699
 GameObject:
   m_ObjectHideFlags: 0
@@ -107937,7 +108154,7 @@ Transform:
   m_GameObject: {fileID: 1975797541}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.19080894, z: -0, w: 0.9816273}
-  m_LocalPosition: {x: 16.76, y: 0.01, z: -17.99}
+  m_LocalPosition: {x: 16.61, y: 0.01, z: -17.75}
   m_LocalScale: {x: 0.049999997, y: 1, z: 0.79999995}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118046,7 +118263,6 @@ SceneRoots:
   - {fileID: 1938805799}
   - {fileID: 1900801237}
   - {fileID: 910426056}
-  - {fileID: 226663179}
   - {fileID: 593326828}
   - {fileID: 142290711}
   - {fileID: 1557892151}
@@ -118055,3 +118271,6 @@ SceneRoots:
   - {fileID: 1718598151}
   - {fileID: 543450653654635090}
   - {fileID: 570683696}
+  - {fileID: 1384279559}
+  - {fileID: 553121713}
+  - {fileID: 1346957580}
