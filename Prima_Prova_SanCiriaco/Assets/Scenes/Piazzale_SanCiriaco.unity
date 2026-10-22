@@ -65806,6 +65806,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ac6233da3747de43a905b4bc1635fab, type: 3}
+--- !u!1 &1193195831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a87083a9519d484482f195aacf0b408, type: 3}
+  m_PrefabInstance: {fileID: 570683696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1193675733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94375,7 +94380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServerLauncher
   urlHealth: http://127.0.0.1:5000/health
-  timeoutSecondi: 120
+  timeoutSecondi: 40
   mostraCaricamento: 1
   immagineCaricamento: {fileID: 21300000, guid: d97d9468179767c459e7a265ae77558d, type: 3}
   dimensioneImmagine: {x: 300, y: 300}
@@ -94388,6 +94393,9 @@ MonoBehaviour:
   - {fileID: 0}
   componentiDaDisabilitare:
   - {fileID: 593326825}
+  oggettiDaDisattivareSeNoServer:
+  - {fileID: 1193195831}
+  - {fileID: 1469867716}
 --- !u!4 &1718598151
 Transform:
   m_ObjectHideFlags: 0

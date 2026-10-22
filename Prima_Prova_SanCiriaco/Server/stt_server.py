@@ -1,5 +1,17 @@
+import os
+import sys
+
+# ----------------------------------------------------------------------
+# 0. CONFIGURAZIONE CACHE LOCALE (senza disabilitare il traffico di rete)
+# ----------------------------------------------------------------------
+cartella_server = os.path.dirname(os.path.abspath(__file__))
+cache_locale = os.path.join(cartella_server, "hf_cache")
+if os.path.exists(cache_locale):
+    os.environ["HF_HOME"] = cache_locale
+    os.environ["HUGGINGFACE_HUB_CACHE"] = cache_locale
+
 import torch
-torch.backends.cudnn.enabled = False  # evita il conflitto con le DLL cuDNN di sistema
+torch.backends.cudnn.enabled = False  # Evita conflitti con DLL cuDNN di sistema
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse
@@ -11,12 +23,10 @@ import numpy as np
 import tempfile
 import wave
 import re
-import os
-
-app = FastAPI()
+import uvicorn
 
 # ----------------------------------------------------------------------
-# RILEVAMENTO HARDWARE (CUDA / CPU FALLBACK)
+# RILEVAMENTO HARDWARE
 # ----------------------------------------------------------------------
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"[Device] Hardware rilevato per inferenza: {device.upper()}", flush=True)
@@ -24,26 +34,35 @@ print(f"[Device] Hardware rilevato per inferenza: {device.upper()}", flush=True)
 # ----------------------------------------------------------------------
 # 1. SETUP SPEECH-TO-TEXT (faster-whisper)
 # ----------------------------------------------------------------------
-# Su GPU usa int8_float16 per performance/VRAM ottimali, su CPU usa int8 standard
 whisper_compute = "int8_float16" if device == "cuda" else "int8"
-stt_model = WhisperModel("small", device=device, compute_type=whisper_compute)
+
+# Usa la cache locale senza bloccare il traffico per consentire il download iniziale
+stt_model = WhisperModel(
+    "small", 
+    device=device, 
+    compute_type=whisper_compute,
+    download_root=cache_locale if os.path.exists(cache_locale) else None
+)
 
 # ----------------------------------------------------------------------
-# 2. SETUP TEXT-TO-SPEECH (Kokoro - Voce Italiana)
+# 2. SETUP TEXT-TO-SPEECH (Kokoro)
 # ----------------------------------------------------------------------
-KOKORO_VOICE = "if_sara"        # femminile. Alternativa maschile: "im_nicola"
-KOKORO_SPEED = 0.95             # <1 = più posata, adatta a una guida
+KOKORO_VOICE = "if_sara"
+KOKORO_SPEED = 0.95
 KOKORO_SAMPLE_RATE = 24000
 
-# Fallback automatico: se cuda non è disponibile, inizializza su cpu
 kokoro = KPipeline(lang_code="i", repo_id="hexgrad/Kokoro-82M", device=device)
 
-# Riscaldamento: la prima sintesi è lenta, la facciamo all'avvio
-print("[TTS] Riscaldamento Kokoro...", flush=True)
-for _ in kokoro("Test di avvio.", voice=KOKORO_VOICE):
-    pass
-print("[TTS] Kokoro pronto.", flush=True)
+# Riscaldamento rapido del grafo CUDA / Torch
+print("[TTS] Riscaldamento rapido Kokoro...", flush=True)
+try:
+    for _ in kokoro("A", voice=KOKORO_VOICE, speed=KOKORO_SPEED):
+        pass
+    print("[TTS] Kokoro pronto.", flush=True)
+except Exception as e:
+    print(f"[TTS Warning] Warmup saltato: {e}", flush=True)
 
+app = FastAPI()
 
 def pulisci_testo(testo: str) -> str:
     """Toglie markdown e simboli che il TTS leggerebbe male."""
@@ -51,18 +70,15 @@ def pulisci_testo(testo: str) -> str:
     testo = re.sub(r"\s+", " ", testo)
     return testo.strip()
 
-
 # ----------------------------------------------------------------------
 # ENDPOINTS
 # ----------------------------------------------------------------------
 class TTSRequest(BaseModel):
     text: str
 
-
 @app.get("/health")
 async def health():
     return {"status": "ok"}
-
 
 @app.post("/transcribe")
 async def transcribe_audio(file: UploadFile = File(...)):
@@ -85,7 +101,6 @@ async def transcribe_audio(file: UploadFile = File(...)):
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
-
 
 @app.post("/tts")
 async def text_to_speech(req: TTSRequest):
@@ -125,7 +140,5 @@ async def text_to_speech(req: TTSRequest):
         background=BackgroundTask(os.remove, output_file),
     )
 
-
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=5000)

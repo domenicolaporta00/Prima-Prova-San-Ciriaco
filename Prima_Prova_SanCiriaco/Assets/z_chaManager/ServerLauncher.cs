@@ -11,7 +11,7 @@ public class ServerLauncher : MonoBehaviour
 {
     [Header("Server")]
     [SerializeField] private string urlHealth = "http://127.0.0.1:5000/health";
-    [SerializeField] private float timeoutSecondi = 120f;
+    [SerializeField] private float timeoutSecondi = 40f;
 
     [Header("Schermata di caricamento")]
     [SerializeField] private bool mostraCaricamento = true;
@@ -27,9 +27,13 @@ public class ServerLauncher : MonoBehaviour
     [Tooltip("Secondi per un ciclo completo (chiaro -> scuro -> chiaro)")]
     [SerializeField] private float durataCiclo = 2.2f;
 
-    [Header("Da bloccare finché il server non è pronto")]
+    [Header("Da bloccare SOLO durante il caricamento")]
     [SerializeField] private Selectable[] daBloccare;
     [SerializeField] private Behaviour[] componentiDaDisabilitare;
+
+    [Header("Da nascondere se il Server NON parte (Modalità Esplorazione)")]
+    [Tooltip("Trascina qui l'avatar zhenja, Trigger_Chat, bottoni microfono, ecc.")]
+    [SerializeField] private GameObject[] oggettiDaDisattivareSeNoServer;
 
     public bool ServerPronto { get; private set; }
 
@@ -45,11 +49,14 @@ public class ServerLauncher : MonoBehaviour
 
     private IEnumerator Start()
     {
-        // Overlay e blocco subito, prima del primo frame: niente flash della scena
+        // 0. Nasconde preventivamente gli elementi dell'IA all'avvio
+        ImpostaOggettiGuida(false);
+
+        // 1. Blocca i controlli e prepara l'overlay
         Blocca(true);
         if (mostraCaricamento) CreaOverlay();
 
-        // 1. Server già attivo? Allora toglie subito la schermata
+        // 2. Controllo rapido: il server è già attivo?
         bool attivo = false;
         yield return ControllaHealth(r => attivo = r);
         if (attivo)
@@ -57,6 +64,7 @@ public class ServerLauncher : MonoBehaviour
             ServerPronto = true;
             UnityEngine.Debug.Log("[Launcher] Server già attivo.");
             Blocca(false);
+            ImpostaOggettiGuida(true);
             yield return ChiudiOverlay(null, 0f);
             yield break;
         }
@@ -64,13 +72,12 @@ public class ServerLauncher : MonoBehaviour
         string bat = PercorsoBat;
         if (!File.Exists(bat))
         {
-            UnityEngine.Debug.LogError($"[Launcher] File non trovato: {bat}");
-            Blocca(false);
-            yield return ChiudiOverlay("File di avvio non trovato", 2f);
+            UnityEngine.Debug.LogWarning($"[Launcher] File non trovato: {bat}. Avvio in modalità solo esplorazione.");
+            EntraInModalitaSolaEsplorazione("Guida non disponibile: file server non trovato");
             yield break;
         }
 
-        // 3. Avvio senza finestra
+        // 3. Avvio script batch in background
         bool avvioFallito = false;
         try
         {
@@ -93,14 +100,13 @@ public class ServerLauncher : MonoBehaviour
 
         if (avvioFallito)
         {
-            yield return ChiudiOverlay("Errore di avvio del server", 3f);
-            Blocca(false);
+            EntraInModalitaSolaEsplorazione("Guida non disponibile: errore avvio");
             yield break;
         }
 
-        // 4. Attesa: animazione ogni frame, health ogni 3 secondi
+        // 4. Polling attivo dell'endpoint di health check
         float inizio = Time.unscaledTime;
-        float prossimoControllo = inizio + 3f;
+        float prossimoControllo = inizio + 0.5f;
         bool controlloInCorso = false;
 
         while (Time.unscaledTime - inizio < timeoutSecondi)
@@ -112,7 +118,7 @@ public class ServerLauncher : MonoBehaviour
                 {
                     if (ok) ServerPronto = true;
                     controlloInCorso = false;
-                    prossimoControllo = Time.unscaledTime + 3f;
+                    prossimoControllo = Time.unscaledTime + 0.5f;
                 }));
             }
 
@@ -122,21 +128,39 @@ public class ServerLauncher : MonoBehaviour
             yield return null;
         }
 
+        // 5. Esito finale
         if (ServerPronto)
         {
             UnityEngine.Debug.Log($"[Launcher] Server pronto dopo {Time.unscaledTime - inizio:F0}s.");
             Blocca(false);
+            ImpostaOggettiGuida(true);
             yield return ChiudiOverlay(null, 0f);
         }
         else
         {
-            UnityEngine.Debug.LogError("[Launcher] Timeout: il server non è partito. Controlla Server\\server.log");
-            yield return ChiudiOverlay("Server non raggiungibile (vedi server.log)", 3f);
-            Blocca(false);
+            UnityEngine.Debug.LogWarning("[Launcher] Timeout server. Hardware non sufficiente o server non avviato.");
+            EntraInModalitaSolaEsplorazione("Modalità Esplorazione: Guida Virtuale non attiva");
         }
     }
 
-    // ------------------------------------------------------------------
+    private void EntraInModalitaSolaEsplorazione(string messaggioAvviso)
+    {
+        Blocca(false);
+        ImpostaOggettiGuida(false);
+        StartCoroutine(ChiudiOverlay(messaggioAvviso, 2.5f));
+    }
+
+    private void ImpostaOggettiGuida(bool attiva)
+    {
+        if (oggettiDaDisattivareSeNoServer != null)
+        {
+            foreach (GameObject go in oggettiDaDisattivareSeNoServer)
+            {
+                if (go != null) go.SetActive(attiva);
+            }
+        }
+    }
+
     private IEnumerator ControllaHealth(Action<bool> risultato)
     {
         using (UnityWebRequest req = UnityWebRequest.Get(urlHealth))
@@ -148,7 +172,7 @@ public class ServerLauncher : MonoBehaviour
     }
 
     // ------------------------------------------------------------------
-    // Overlay
+    // Overlay UI
     // ------------------------------------------------------------------
     private void CreaOverlay()
     {
@@ -168,7 +192,7 @@ public class ServerLauncher : MonoBehaviour
         Image sfondo = CreaImage("Sfondo", overlay.transform, new Color(0f, 0f, 0f, opacitaSfondo));
         Stira(sfondo.rectTransform);
 
-        // Logo (con CanvasGroup per la pulsazione)
+        // Logo
         float yTesto = -dimensioneImmagine.y / 2f - 30f;
         if (immagineCaricamento != null)
         {
@@ -188,7 +212,7 @@ public class ServerLauncher : MonoBehaviour
             yTesto = 0f;
         }
 
-        // Testo sotto il logo
+        // Testo informativo
         GameObject goTesto = new GameObject("Testo", typeof(RectTransform));
         goTesto.transform.SetParent(overlay.transform, false);
         testoCaricamento = goTesto.AddComponent<TextMeshProUGUI>();
@@ -208,14 +232,12 @@ public class ServerLauncher : MonoBehaviour
     {
         if (overlay == null) return;
 
-        // Pulsazione: oscilla tra opacitaMinima e 1 con andamento morbido (seno)
         if (gruppoLogo != null)
         {
             float onda = (Mathf.Sin(secondi * 2f * Mathf.PI / Mathf.Max(0.1f, durataCiclo) - Mathf.PI / 2f) + 1f) / 2f;
             gruppoLogo.alpha = Mathf.Lerp(opacitaMinima, 1f, onda);
         }
 
-        // Puntini: quelli non ancora "accesi" restano invisibili, così la scritta non si sposta
         int punti = (int)(secondi * 2f) % 4;
         string accesi = new string('.', punti);
         string spenti = new string('.', 3 - punti);
@@ -233,7 +255,6 @@ public class ServerLauncher : MonoBehaviour
             yield return new WaitForSecondsRealtime(attesa);
         }
 
-        // Dissolvenza finale
         float durata = 0.6f;
         float t = 0f;
         while (t < durata && gruppoOverlay != null)
