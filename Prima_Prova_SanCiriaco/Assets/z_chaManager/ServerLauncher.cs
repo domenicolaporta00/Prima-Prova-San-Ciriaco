@@ -11,7 +11,12 @@ public class ServerLauncher : MonoBehaviour
 {
     [Header("Server")]
     [SerializeField] private string urlHealth = "http://127.0.0.1:5000/health";
-    [SerializeField] private float timeoutSecondi = 40f;
+    [Tooltip("Tempo massimo di attesa mostrando la schermata di caricamento. Poi si entra in modalità esplorazione, ma si continua ad attendere il server in background.")]
+    [SerializeField] private float timeoutSecondi = 150f;
+    [Tooltip("Dopo il timeout continua a controllare il server per questo tempo e, se arriva, riattiva la guida.")]
+    [SerializeField] private float attesaExtraSecondi = 300f;
+    [Tooltip("Se spento, nell'Editor il server NON viene chiuso all'uscita dal Play (i Play successivi sono immediati). Nella build viene sempre chiuso.")]
+    [SerializeField] private bool chiudiServerInEditor = false;
 
     [Header("Schermata di caricamento")]
     [SerializeField] private bool mostraCaricamento = true;
@@ -138,9 +143,35 @@ public class ServerLauncher : MonoBehaviour
         }
         else
         {
-            UnityEngine.Debug.LogWarning("[Launcher] Timeout server. Hardware non sufficiente o server non avviato.");
-            EntraInModalitaSolaEsplorazione("Modalità Esplorazione: Guida Virtuale non attiva");
+            UnityEngine.Debug.LogWarning("[Launcher] Timeout schermata di caricamento. Continuo ad attendere il server in background.");
+            EntraInModalitaSolaEsplorazione("Guida in preparazione, sarà disponibile a breve");
+            StartCoroutine(AttendiServerInRitardo());
         }
+    }
+
+    // Dopo il timeout il server può ancora arrivare: appena risponde riattiva la guida.
+    private IEnumerator AttendiServerInRitardo()
+    {
+        float limite = Time.unscaledTime + attesaExtraSecondi;
+
+        while (!ServerPronto && Time.unscaledTime < limite)
+        {
+            bool ok = false;
+            yield return ControllaHealth(r => ok = r);
+
+            if (ok)
+            {
+                ServerPronto = true;
+                ImpostaOggettiGuida(true);
+                UnityEngine.Debug.Log("[Launcher] Server pronto (in ritardo): guida attivata.");
+                yield break;
+            }
+
+            yield return new WaitForSecondsRealtime(2f);
+        }
+
+        if (!ServerPronto)
+            UnityEngine.Debug.LogWarning("[Launcher] Il server non è partito neppure nell'attesa extra. Controlla Server\\server.log");
     }
 
     private void EntraInModalitaSolaEsplorazione(string messaggioAvviso)
@@ -297,6 +328,9 @@ public class ServerLauncher : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        // Nell'Editor il server resta vivo tra un Play e l'altro (a meno che tu non lo chieda).
+        if (Application.isEditor && !chiudiServerInEditor) return;
+
         if (processo != null && !processo.HasExited)
         {
             Process.Start(new ProcessStartInfo

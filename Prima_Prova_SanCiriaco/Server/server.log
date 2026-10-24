@@ -1,5 +1,6 @@
-[22/10/2026 17:24:49,47] Avvio 
+[24/10/2026 10:51:49,11] Avvio 
 [1/3] Controllo Ollama... 
+      Ollama non attivo, lo avvio... 
       Ollama attivo. 
 [2/3] Precaricamento asincrono di gemma3:4b... 
 [3/3] Avvio immediato server STT/TTS... 
@@ -11,13 +12,9 @@ C:\Users\Asus\Desktop\progetto_computer_graphics\Prima-Prova-San-Ciriaco\Prima_P
   WeightNorm.apply(module, name, dim)
 [TTS] Riscaldamento rapido Kokoro...
 [TTS] Kokoro pronto.
-INFO:     Started server process [11688]
+INFO:     Started server process [24216]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:5000 (Press CTRL+C to quit)
-INFO:     127.0.0.1:62463 - "GET /health HTTP/1.1" 200 OK
-[STT Trascritto]: Parlamide, Duomo.
-INFO:     127.0.0.1:62467 - "POST /transcribe HTTP/1.1" 200 OK
-[TTS Sintesi]: Benvenuto! Sono il Duomo di San Ciriaco, e sono felice di guidarti alla scoperta della mia storia e della bellezza di questo luogo. Cosa ti incuriosisce di più del mio Duomo e del Colle Guasco?
-[TTS Generato]: C:\Users\Asus\AppData\Local\Temp\tmpbj1cekoz.wav (571244 bytes)
-INFO:     127.0.0.1:62467 - "POST /tts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60366 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /health HTTP/1.1" 200 OK
